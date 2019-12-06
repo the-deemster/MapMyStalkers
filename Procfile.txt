@@ -1,1 +1,1 @@
-web: python MapMyStalkers.py 
+web: gunicorn MapMyStalkers:app 
