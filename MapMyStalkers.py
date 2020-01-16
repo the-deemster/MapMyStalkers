@@ -1,4 +1,6 @@
 from flask import Flask, request, render_template
+import sys
+sys.path.insert(1,"src")
 import sudonFindIPScript
 import apiGeoScriptLatLng
 app = Flask(__name__)

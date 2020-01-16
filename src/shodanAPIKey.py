@@ -9,4 +9,4 @@ def getAPIKey():
 	#step 6) click the shodan email and click the link provided 
 	#step 7) sign in with your user name and password
 	#step 8) write the api key in the code bellow where it says Your api key
-	return 's6Uvl7F21fZ6JBJp7D36Pg7DUalekC8v'
+	return 'yourAPIKey'

@@ -1,5 +1,5 @@
 import requests 
-
+import GeoScriptAPIKey
 def findAndPrint(result, response):
 	str="" 
 	num = 10
@@ -11,7 +11,7 @@ def findAndPrint(result, response):
 		str+=response.text[element]
 	return str
 def geoLocationScript(text): 
-	print("your in")
+	 
 	lines = []
 	num = 0
 	for line in text:
@@ -22,29 +22,27 @@ def geoLocationScript(text):
 		querystring = {"ip":str1}
 		headers = {
 			'x-rapidapi-host': "ip-geolocation-ipwhois-io.p.rapidapi.com",
-			'x-rapidapi-key': "686f776c45msh6cdb33dd9424ad1p15ed09jsnb6c766735c05"
+			'x-rapidapi-key': GeoScriptAPIKey.getAPIKey()
 			} 
 		response = requests.request("GET", url, headers=headers,params=querystring)
 		state = "region\":\""
+		latitude = "\"latitude\":\""
+		longitude = "\"longitude\":\""
 		city = "city\":\""
 		country = "country\":\""
-		
-		string += "***********************************************<br>"
-		string +="ip address:\t"+str1+"<br>"
-		
 		if(response.text.find(country)== -1):
 			return "404"
-		result = response.text.find(country) + len(country)
-		string +="county: " + findAndPrint(result, response)+"<br>"
-		result = response.text.find(state) + len(state)
-		if(findAndPrint(result, response).find("\\")== -1): 
-			string +="region: " + findAndPrint(result, response)+"<br>"
-		result = response.text.find(city) + len(city)
-		if(findAndPrint(result, response).find("\\")== -1):
-			string +="city: " + findAndPrint(result, response)+"<br>"
-		num+=1
-		lines.append(string+"<br>")
-		if(num >=10):
+		result = response.text.find(latitude) + len(latitude) 
+		string +="var marker = new H.map.Marker({lat:" + findAndPrint(result, response)
+		result = response.text.find(longitude) + len(longitude)
+		string +=", lng:" + findAndPrint(result, response)
+		string += "});map.addObject(marker);"
+		 
+		 
+		#num+=1
+		lines.append(string)
+		 
+		if(num >=2):
 			break
 	return lines
      

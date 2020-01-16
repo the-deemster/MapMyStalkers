@@ -11,6 +11,7 @@ def sudanFunction(ip):
 		# Perform the search
 		query = ' '.join(ip)
 		result = api.search(query)
+		print(type(result))
 	for service in result['matches']:
 		lines.append(service['ip_str'])
 	return lines
